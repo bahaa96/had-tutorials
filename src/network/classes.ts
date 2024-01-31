@@ -1,39 +1,31 @@
+import { MyClass } from "../domain-models";
+import instance from "./instance";
+
 interface RequestFetchMyClassesArgs {
-  q: string;
   rps: number;
-  pageToken?: string;
+	rpi: number;
   options?: {
     signal?: AbortSignal;
   };
 }
 
-interface RequestFetchMyClassesResponse {
-  kind: string;
-  etag: string;
-  nextPageToken: string;
-  prevPageToken: string;
-  regionCode: string;
-  pageInfo: {
-    totalResults: number;
-    resultsPerPage: number;
-  };
-  items: Class[];
-}
-
 const requestFetchMyClassesResults = async ({
-  q,
+  rpi,
   rps,
-  pageToken,
   options,
 }: RequestFetchMyClassesArgs): Promise<{
-  data: Class[];
+  data: MyClass[];
   totalCount: number;
-  nextPageToken: string | null;
-  prevPageToken: string | null;
 }> => {
-	return {
+	const { data: {  classes, totalCount } } = await instance.get('/api/classes', {
+		params: {
+			rpi,
+			rps,
+			signal: options?.signal,
+		}
+	})
 
-	}
+	return { data: classes, totalCount  }
 }
 
 export { requestFetchMyClassesResults }
