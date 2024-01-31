@@ -1,4 +1,4 @@
-import { Typography, Colors, Spacings, ThemeManager } from 'react-native-ui-lib';
+import { Typography, Colors, Spacings, ThemeManager, Assets } from 'react-native-ui-lib';
 
 export const initTheme = () => {
   Colors.loadSchemes({
@@ -21,7 +21,7 @@ export const initTheme = () => {
   });
 
 
-  ThemeManager.setComponentTheme('Text', (props, context) => ({
+  ThemeManager.setComponentTheme('Text', (props) => ({
     color: Colors.textColor,
     color: props.color,
   }));
@@ -30,11 +30,21 @@ export const initTheme = () => {
   Typography.loadTypographies({
     h1: { fontSize: 58, fontWeight: '300', lineHeight: 80 },
     h2: { fontSize: 46, fontWeight: '300', lineHeight: 64 },
+    h5: { fontSize: 12 },
+    light: {  fontWeight: '300'}, 
+    badge: { fontSize: 10, fontWeight: '700', letterSpacing: 0.125 },
     bold: { fontWeight: '700' },
     semiBold: { fontWeight: '500' },
   });
 
   Spacings.loadSpacings({
     //   page: isSmallScreen ? 12 : 14
+  });
+
+  Assets.loadAssetsGroup('icons', {
+    ClassIconFilled: require('../assets/icons/class-icon-filled.png'),
+    HomeIcon: require('../assets/icons/home-icon.png'),
+    SoloIcon: require('../assets/icons/solo-icon.png'),
+    UserIcon: require('../assets/icons/user-icon.png'),
   });
 }

@@ -1,3 +1,7 @@
+import Config from "react-native-config";
+
 const config = {
-	apiURL: process.env.API_URL,
+	apiURL: Config.API_URL,
 }
+
+export default config;
